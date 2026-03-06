@@ -8,6 +8,7 @@ class Food(FoodBase, table=True):
 
 class FoodPublic(FoodBase):
     id: int
+    is_sell: bool
 
 class FoodCreate(FoodBase):
     is_sell: bool = Field(default=False)
