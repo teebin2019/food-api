@@ -7,7 +7,7 @@ from database import SessionDep
 from schemas import Food, FoodCreate, FoodPublic, FoodUpdate
 
 router = APIRouter(
-    prefix="/foods",
+    prefix="/api/foods",
     tags=["Foods"],
     # dependencies=[Depends(get_token_header)],
     responses={404: {"description": "Not found"}},
