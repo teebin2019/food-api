@@ -1,15 +1,15 @@
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query
 from sqlmodel import select
 from typing import Annotated
 
-from dependencies import get_token_header
+# from dependencies import get_token_header
 from database import SessionDep
-from schemas import Food, FoodCreate, FoodPublic
+from schemas import Food, FoodCreate, FoodPublic, FoodUpdate
 
 router = APIRouter(
     prefix="/foods",
     tags=["Foods"],
-    dependencies=[Depends(get_token_header)],
+    # dependencies=[Depends(get_token_header)],
     responses={404: {"description": "Not found"}},
     
 )
@@ -42,7 +42,7 @@ def read_food(food_id: int, session: SessionDep):
 
 
 @router.patch("/{food_id}", response_model=FoodPublic)
-def update_food(food_id: int, food: Food, session: SessionDep):
+def update_food(food_id: int, food: FoodUpdate, session: SessionDep):
     food_db = session.get(Food, food_id)
     if not food_db:
         raise HTTPException(status_code=404, detail="Food not found")
